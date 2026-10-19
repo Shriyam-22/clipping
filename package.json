@@ -1,0 +1,15 @@
+{
+  "name": "clipping",
+  "version": "1.0.0",
+  "description": "A small full-stack press coverage tracker: REST API, SQLite and a mobile-friendly web UI. Zero dependencies.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --watch --disable-warning=ExperimentalWarning src/server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/api.test.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "license": "MIT"
+}
