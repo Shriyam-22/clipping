@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clipping — press coverage tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Clipping</h1>
+    <p class="sub">Log press coverage. See what's landing.</p>
+  </header>
+
+  <main>
+    <section class="stats" aria-live="polite">
+      <div class="stat"><span id="s-total">0</span><small>Total clips</small></div>
+      <div class="stat"><span id="s-tier1">0</span><small>Tier 1</small></div>
+      <div class="stat"><span id="s-pos">–</span><small>Positive</small></div>
+      <div class="stat"><span id="s-neg">–</span><small>Negative</small></div>
+    </section>
+
+    <details class="card" id="add-card" open>
+      <summary>Log a clip</summary>
+      <form id="form" novalidate>
+        <label>Link<input name="url" type="url" inputmode="url" placeholder="https://…" required></label>
+        <p class="err" data-for="url"></p>
+        <label>Headline<input name="headline" required maxlength="300"></label>
+        <p class="err" data-for="headline"></p>
+        <div class="row">
+          <label>Outlet<input name="outlet" list="outlets" required maxlength="120"></label>
+          <label>Published<input name="published" type="date" required></label>
+        </div>
+        <p class="err" data-for="outlet"></p>
+        <p class="err" data-for="published"></p>
+        <div class="row">
+          <label>Tier
+            <select name="tier"><option value="1">Tier 1</option><option value="2" selected>Tier 2</option><option value="3">Tier 3</option></select>
+          </label>
+          <label>Sentiment
+            <select name="sentiment"><option value="positive">Positive</option><option value="neutral" selected>Neutral</option><option value="negative">Negative</option></select>
+          </label>
+        </div>
+        <label>Campaign <em>(optional)</em><input name="campaign" list="campaigns" maxlength="60"></label>
+        <p class="err" data-for="campaign"></p>
+        <div class="dupe" id="dupe" hidden></div>
+        <button type="submit" id="submit">Save clip</button>
+      </form>
+    </details>
+
+    <section class="card">
+      <div class="filters">
+        <input id="q" type="search" placeholder="Search headline or outlet">
+        <select id="f-campaign"><option value="">All campaigns</option></select>
+        <select id="f-sentiment"><option value="">Any sentiment</option><option>positive</option><option>neutral</option><option>negative</option></select>
+      </div>
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="empty" hidden></p>
+    </section>
+  </main>
+
+  <datalist id="outlets"></datalist>
+  <datalist id="campaigns"></datalist>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
